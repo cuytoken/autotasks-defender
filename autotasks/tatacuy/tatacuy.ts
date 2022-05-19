@@ -1,19 +1,18 @@
-import axios from "axios";
-import { Buffer } from "buffer";
-import { RelayerParams } from 'defender-relay-client/lib/relayer';
-import { DefenderRelaySigner, DefenderRelayProvider } from "defender-relay-client/lib/ethers";
+import { RelayerParams } from "defender-relay-client/lib/relayer";
+import {
+    DefenderRelaySigner,
+    DefenderRelayProvider,
+} from "defender-relay-client/lib/ethers";
 
-var { Relayer } = require("defender-relay-client");
 var { ethers } = require("ethers");
 
 import tatacuyAbi from "./abi/tatacuyAbi";
-import { domain, value, types } from "./data"
+import { domain, value, types } from "./data";
 
-var tatacuyAddress = "0x5571780676d7D3C9498ac5Ae89089e3168923D5D";
+import { tatacuyAddress } from "../scAddresses";
 
-
-export async function handler(data: any) {
-    // validate secrte
+export async function handler(data: RelayerParams) {
+    // validate secret
 
     var provider = new DefenderRelayProvider(data);
     var signer = new DefenderRelaySigner(data, provider, { speed: "fast" });
@@ -27,23 +26,42 @@ export async function handler(data: any) {
         pachaUuid,
         signature,
     } = data.request.body;
-    var values = { ...value, guineaPig, wallet, likelihood, context }
+    console.log("bodye", data.request.body);
+
+    var values = { ...value, guineaPig, wallet, likelihood, context };
+    console.log("wallet", wallet.toLowerCase());
     var recoveredAddress = ethers.utils.verifyTypedData(
         domain,
         types,
         values,
         signature
     );
+    console.log("recoveredAddress", recoveredAddress.toLowerCase());
 
     if (recoveredAddress.toLowerCase() !== wallet.toLowerCase()) return false;
 
     // validate with Ludik's backend
+    /**
+     *  data to send:
+     *  - timestamp
+     *  - wallet address
+     *
+     *  validate at backend:
+     *  - that user has initiated the transaction
+     *  - that timestamp of transaction is within 15 seconds
+     *
+     *  should return:
+     *  - bool
+     *
+     */
+
     // use 'recoveredAddress'
+    console.log("Params SC", wallet, pachaOwner, pachaUuid, likelihood);
     var tatacuyContract = new ethers.Contract(tatacuyAddress, tatacuyAbi, signer);
-    await tatacuyContract.connect(signer).tryMyLuckTatacuy(
-        wallet,
-        pachaOwner,
-        pachaUuid,
-        likelihood
-    )
-};
+    var tx = await tatacuyContract
+        .connect(signer)
+        .tryMyLuckTatacuy(wallet, pachaOwner, pachaUuid, likelihood);
+    var res = await tx.wait(1);
+    console.log("RES", res);
+    return true;
+}

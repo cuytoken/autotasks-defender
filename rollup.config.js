@@ -17,6 +17,10 @@ var paths = {
     input: "autotasks/tatacuy/tatacuy.ts",
     output: "dist/tatacuy/index.js",
   },
+  wiracocha: {
+    input: "autotasks/wiracocha/wiracocha.ts",
+    output: "dist/wiracocha/index.js",
+  },
 };
 
 export default (commandLineArgs) => {

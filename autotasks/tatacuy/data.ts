@@ -1,8 +1,10 @@
+import { tatacuyAddress } from "../scAddresses";
+
 export var domain = {
     name: "Tatacuy Game",
     version: "alpha",
     chainId: "97",
-    verifyingContract: "0x5571780676d7D3C9498ac5Ae89089e3168923D5D",
+    verifyingContract: tatacuyAddress,
 };
 
 // The named list of all type definitions
