@@ -15,7 +15,6 @@ export var types = {
         { name: "wallet", type: "address" },
         { name: "pachaUuid", type: "string" },
         { name: "samiPoints", type: "string" },
-        { name: "amountPcuy", type: "string" },
     ],
 };
 
@@ -27,7 +26,6 @@ export interface IValue {
     wallet: string;
     pachaUuid: string;
     samiPoints: string;
-    amountPcuy: string;
 }
 
 export var value: IValue = {
@@ -36,5 +34,5 @@ export var value: IValue = {
     wallet: "",
     pachaUuid: "",
     samiPoints: "",
-    amountPcuy: "",
 };
+

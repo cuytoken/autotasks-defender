@@ -21,6 +21,10 @@ var paths = {
     input: "autotasks/wiracocha/wiracocha.ts",
     output: "dist/wiracocha/index.js",
   },
+  bottelegram: {
+    input: "autotasks/bottelegram/bottelegram.ts",
+    output: "dist/bottelegram/index.js",
+  },
 };
 
 export default (commandLineArgs) => {

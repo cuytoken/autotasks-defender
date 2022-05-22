@@ -13,19 +13,16 @@ export async function handler(data: RelayerParams) {
     var provider = new DefenderRelayProvider(data);
     var signer = new DefenderRelaySigner(data, provider, { speed: "fast" });
 
-    amountPcuy
     var {
         context,
         guineaPig,
         wallet,
         pachaUuid,
         samiPoints,
-        amountPcuy,
         pachaOwner,
-        rateSamiPointsToPcuy,
         signature,
     } = data.request.body;
-    var values: IValue = { ...value, guineaPig, wallet, pachaUuid, samiPoints, amountPcuy, context }
+    var values: IValue = { ...value, guineaPig, wallet, pachaUuid, samiPoints, context }
     var recoveredAddress = ethers.utils.verifyTypedData(
         domain,
         types,
@@ -50,13 +47,15 @@ export async function handler(data: RelayerParams) {
      *
      */
     var wiracochaContract = new ethers.Contract(wiracochaAddress, wiracochaAbi, signer);
-    await wiracochaContract.connect(signer).exchangeSamiToPcuy(
+    var tx = await wiracochaContract.connect(signer).exchangeSamiToPcuy(
         wallet,
         pachaOwner,
         pachaUuid,
         samiPoints,
-        amountPcuy,
-        rateSamiPointsToPcuy
     )
-    return true;
+    var res = await tx.wait(1);
+
+    // PENDING work on the filter topic
+
+    return res;
 };

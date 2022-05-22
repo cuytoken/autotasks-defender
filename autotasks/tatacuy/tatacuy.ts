@@ -26,17 +26,14 @@ export async function handler(data: RelayerParams) {
         pachaUuid,
         signature,
     } = data.request.body;
-    console.log("bodye", data.request.body);
 
     var values = { ...value, guineaPig, wallet, likelihood, context };
-    console.log("wallet", wallet.toLowerCase());
     var recoveredAddress = ethers.utils.verifyTypedData(
         domain,
         types,
         values,
         signature
     );
-    console.log("recoveredAddress", recoveredAddress.toLowerCase());
 
     if (recoveredAddress.toLowerCase() !== wallet.toLowerCase()) return false;
 
@@ -56,12 +53,10 @@ export async function handler(data: RelayerParams) {
      */
 
     // use 'recoveredAddress'
-    console.log("Params SC", wallet, pachaOwner, pachaUuid, likelihood);
     var tatacuyContract = new ethers.Contract(tatacuyAddress, tatacuyAbi, signer);
     var tx = await tatacuyContract
         .connect(signer)
         .tryMyLuckTatacuy(wallet, pachaOwner, pachaUuid, likelihood);
     var res = await tx.wait(1);
-    console.log("RES", res);
-    return true;
+    return res;
 }
