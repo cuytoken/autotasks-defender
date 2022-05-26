@@ -4,6 +4,7 @@ import {
     DefenderRelayProvider,
 } from "defender-relay-client/lib/ethers";
 var { ethers } = require("ethers");
+var axios = require("axios");
 
 import wiracochaAbi from "./abi/wiracochaAbi";
 import { domain, value, types, IValue } from "./data";
@@ -24,6 +25,7 @@ export async function handler(data: RelayerParams) {
         samiPoints,
         pachaOwner,
         signature,
+        timeStampFront,
     } = data.request.body;
     var values: IValue = {
         ...value,
@@ -54,21 +56,19 @@ export async function handler(data: RelayerParams) {
      *
      *  should return:
      *  - bool
-     *
+     *  - sami points
      */
 
-    var payload = {
-        wallet: recoveredAddress
-    };
-    var postDataWiracocha = {
-        method: "POST",
-        headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-    };
-    // var {} = await axios(url, postDataWiracocha);
+    var ip = "http://3.80.7.117:3000";
+    var url = `${ip}/wiracocha/reward-participations/${recoveredAddress.toLowerCase()}/wallet/${timeStampFront}/timestamp/${guineaPig}/cuyTokenId`;
+
+    var res = await axios(url);
+    var { id: _idFromFront, isOn, samiPoints: _samiPoints } = res.data;
+
+    console.log(_idFromFront, isOn, _samiPoints);
+
+    if (samiPoints != _samiPoints) return false;
+    if (!isOn) return false;
 
     var wiracochaContract = new ethers.Contract(
         wiracochaAddress,
@@ -77,6 +77,12 @@ export async function handler(data: RelayerParams) {
     );
     var tx = await wiracochaContract
         .connect(signer)
-        .exchangeSamiToPcuy(wallet, pachaOwner, pachaUuid, samiPoints);
+        .exchangeSamiToPcuy(
+            wallet,
+            pachaOwner,
+            pachaUuid,
+            samiPoints,
+            _idFromFront
+        );
     return await tx.wait();
 }
