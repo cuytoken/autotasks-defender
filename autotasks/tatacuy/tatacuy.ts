@@ -24,7 +24,7 @@ interface IGuineaPigValidationRes {
     probability: number;
 }
 
-export async function handler(data: RelayerParams) {
+export async function handler(data: any) {
     // validate secret
 
     var provider = new DefenderRelayProvider(data);
@@ -35,8 +35,7 @@ export async function handler(data: RelayerParams) {
         guineaPig,
         wallet,
         likelihood,
-        pachaOwner,
-        pachaUuid,
+        tatacuyUuid,
         signature,
         timeStampFront,
     } = data.request.body;
@@ -80,6 +79,6 @@ export async function handler(data: RelayerParams) {
     var tatacuyContract = new ethers.Contract(tatacuyAddress, tatacuyAbi, signer);
     var tx = await tatacuyContract
         .connect(signer)
-        .tryMyLuckTatacuy(wallet, pachaOwner, pachaUuid, likelihood, _idFromFront);
+        .tryMyLuckTatacuy(wallet, likelihood, _idFromFront, tatacuyUuid);
     return await tx.wait(1);
 }

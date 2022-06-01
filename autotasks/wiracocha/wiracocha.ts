@@ -11,7 +11,7 @@ import { domain, value, types, IValue } from "./data";
 
 import { wiracochaAddress } from "../scAddresses";
 
-export async function handler(data: RelayerParams) {
+export async function handler(data: any) {
     // validate secret
 
     var provider = new DefenderRelayProvider(data);
@@ -23,7 +23,7 @@ export async function handler(data: RelayerParams) {
         wallet,
         pachaUuid,
         samiPoints,
-        pachaOwner,
+        wiracochaUuid,
         signature,
         timeStampFront,
     } = data.request.body;
@@ -79,10 +79,9 @@ export async function handler(data: RelayerParams) {
         .connect(signer)
         .exchangeSamiToPcuy(
             wallet,
-            pachaOwner,
-            pachaUuid,
             samiPoints,
-            _idFromFront
+            _idFromFront,
+            wiracochaUuid
         );
     return await tx.wait();
 }
