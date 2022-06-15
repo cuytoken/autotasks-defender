@@ -6,9 +6,11 @@ import {
 var { ethers } = require("ethers");
 var axios = require("axios");
 
-import { busdAddress } from "../scAddresses";
+import { pcuyAddress } from "../scAddresses";
 
-var busdAbi = ["function mint(address to, uint256 amount) external"];
+var pcuyAbi = [
+    "function test_mint(address _account, uint256 _amount)",
+];
 
 export async function handler(data: any) {
     // validate secret
@@ -21,21 +23,21 @@ export async function handler(data: any) {
     var provider = new DefenderRelayProvider(data);
     var signer = new DefenderRelaySigner(data, provider, { speed: "fast" });
 
-    var busdContract = new ethers.Contract(busdAddress, busdAbi, signer);
-    var tx = await busdContract
+    var pcuyContract = new ethers.Contract(pcuyAddress, pcuyAbi, signer);
+    var tx = await pcuyContract
         .connect(signer)
-        .mint(wallet, "500000000000000000000");
-    var res = await tx.wait(1);
+        .test_mint(wallet, "5325000000000000000000");
+    // var res = await tx.wait(1);
 
     console.log(
         "======================================================================"
     );
-    console.log("RES", res);
+    // console.log("RES", res);
 
     // responde back to telegram
-    await axios.post(`${TELEGRAM_API}/sendMessage`, {
+    axios.post(`${TELEGRAM_API}/sendMessage`, {
         chat_id: chatId,
-        text: `${from}, depositado`,
+        text: `¡${from}, lo recibirás en breve!`,
     });
 
     return true;

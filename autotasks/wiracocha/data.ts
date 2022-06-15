@@ -3,7 +3,7 @@ import { wiracochaAddress } from "../scAddresses";
 export var domain = {
     name: "Wiracocha",
     version: "alpha",
-    chainId: "97",
+    chainId: "80001",
     verifyingContract: wiracochaAddress,
 };
 

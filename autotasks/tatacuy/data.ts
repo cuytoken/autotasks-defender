@@ -3,7 +3,7 @@ import { tatacuyAddress } from "../scAddresses";
 export var domain = {
     name: "Tatacuy Game",
     version: "alpha",
-    chainId: "97",
+    chainId: "80001",
     verifyingContract: tatacuyAddress,
 };
 

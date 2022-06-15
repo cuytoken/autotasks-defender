@@ -1,31 +1,28 @@
-var AUTOTASK_DEV_MIDDLEWARE_ID = "86d6b907-c546-4b0d-95b2-3811bdf4531b";
-var AUTOTASK_TATACUY_ID = "3da214c4-a2e1-407b-8f83-7227ff917f0e";
-var AUTOTASK_WIRACOCHA_ID = "a6363d6c-5cba-4534-9f6d-e1f49616f6a8";
-var AUTOTASK_BOT_TELEGRAM = "020a63ba-29e2-4354-a5d3-6d7904fef760";
+// Polygon
+// alpha 2
+var AUTOTASK_TATACUY_ID_POLYGON_ALPHA_2 =
+  "068eb09c-6c1e-43b0-8f9b-d2ab5bac527e";
+var AUTOTASK_WIRACOCHA_ID_POLYGON_ALPHA_2 =
+  "ae3ccb21-b444-4802-955c-dcc70ca73a1c";
 
-// dev release misay wasi, qhatu wasi
-var AUTOTASK_TATACUY_DEV_RELEASE_ID = "525abdd1-ee48-4a15-96d8-8d63160dd81e";
-var AUTOTASK_WIRACOCHA_DEV_RELEASE_ID = "f1047be3-364f-4b51-91eb-165d216e36fc";
+// alpha 3
+var AUTOTASK_TATACUY_ID_POLYGON_ALPHA_3_DEV =
+  "8aca10b4-337a-4472-906f-bd144cee835f";
+var AUTOTASK_WIRACOCHA_ID_POLYGON_ALPHA_3_DEV =
+  "0fcf8849-42e5-4ef1-a135-85644b5c2abd";
 
 var mapping = {
-  [AUTOTASK_DEV_MIDDLEWARE_ID]: {
-    pathToFolderCode: "./dist/middleware",
-    address: "0xD15b1609A190816C0626A3a5192205536AE22Ce3", // proxy address SC
-  },
-  [AUTOTASK_TATACUY_ID]: {
+  [AUTOTASK_TATACUY_ID_POLYGON_ALPHA_2]: {
     pathToFolderCode: "./dist/tatacuy",
   },
-  [AUTOTASK_WIRACOCHA_ID]: {
-    pathToFolderCode: "./dist/wiracocha",
-  },
-  [AUTOTASK_TATACUY_DEV_RELEASE_ID]: {
+  [AUTOTASK_TATACUY_ID_POLYGON_ALPHA_3_DEV]: {
     pathToFolderCode: "./dist/tatacuy",
   },
-  [AUTOTASK_WIRACOCHA_DEV_RELEASE_ID]: {
+  [AUTOTASK_WIRACOCHA_ID_POLYGON_ALPHA_2]: {
     pathToFolderCode: "./dist/wiracocha",
   },
-  [AUTOTASK_BOT_TELEGRAM]: {
-    pathToFolderCode: "./dist/bottelegram",
+  [AUTOTASK_WIRACOCHA_ID_POLYGON_ALPHA_3_DEV]: {
+    pathToFolderCode: "./dist/wiracocha",
   },
 };
 
