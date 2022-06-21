@@ -8,5 +8,5 @@ export var pcuyAddress = "0x26813E464DA80707B7F24bf19e08Bf876F0f3388";
 // export var wiracochaAddress = "0xA645bFdb41c151d3137b825baA31579240F5Bd08";
 
 // alpha 3 dev
-export var tatacuyAddress = "0x64d0976565BC2dD7CAF08dd72C6cFaCA3d797e8D";
-export var wiracochaAddress = "0xfd7c97F5Fd07b4407f8730240d352C30eda36Ba8";
+export var tatacuyAddress = "0x2F9b0E0b81bf19415a73eDC9D9f437Eb3827641f";
+export var wiracochaAddress = "0x90f26d07bd30C12713818D210C4803a836EE28c6";
