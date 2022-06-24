@@ -10,6 +10,8 @@ var AUTOTASK_TATACUY_ID_POLYGON_ALPHA_3_DEV =
   "8aca10b4-337a-4472-906f-bd144cee835f";
 var AUTOTASK_WIRACOCHA_ID_POLYGON_ALPHA_3_DEV =
   "0fcf8849-42e5-4ef1-a135-85644b5c2abd";
+var AUTOTASK_SEND_PCUY_TOKENS_ALPHA_3_DEV =
+  "b69539b6-acb9-4ecc-97de-519232278ed6";
 
 var mapping = {
   [AUTOTASK_TATACUY_ID_POLYGON_ALPHA_2]: {
@@ -23,6 +25,9 @@ var mapping = {
   },
   [AUTOTASK_WIRACOCHA_ID_POLYGON_ALPHA_3_DEV]: {
     pathToFolderCode: "./dist/wiracocha",
+  },
+  [AUTOTASK_SEND_PCUY_TOKENS_ALPHA_3_DEV]: {
+    pathToFolderCode: "./dist/tokens",
   },
 };
 

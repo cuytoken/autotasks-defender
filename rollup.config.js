@@ -25,6 +25,10 @@ var paths = {
     input: "autotasks/bottelegram/bottelegram.ts",
     output: "dist/bottelegram/index.js",
   },
+  tokens: {
+    input: "autotasks/tokens/tokens.ts",
+    output: "dist/tokens/index.js",
+  },
 };
 
 export default (commandLineArgs) => {

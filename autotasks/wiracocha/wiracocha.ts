@@ -10,11 +10,9 @@ import wiracochaAbi from "./abi/wiracochaAbi";
 import { domain, value, types, IValue } from "./data";
 
 import { wiracochaAddress } from "../scAddresses";
-console.log("process.argv", process.argv);
 
 export async function handler(data: any) {
     // validate secret
-
     var provider = new DefenderRelayProvider(data);
     var signer = new DefenderRelaySigner(data, provider, { speed: "fast" });
 
@@ -44,7 +42,7 @@ export async function handler(data: any) {
     );
 
     if (recoveredAddress.toLowerCase() !== wallet.toLowerCase()) return false;
-
+    console.log("wallet", recoveredAddress);
     // validate with Ludik's backend
     /**
      *  data to send:
@@ -79,11 +77,6 @@ export async function handler(data: any) {
     );
     var tx = await wiracochaContract
         .connect(signer)
-        .exchangeSamiToPcuy(
-            wallet,
-            samiPoints,
-            _idFromFront,
-            wiracochaUuid
-        );
+        .exchangeSamiToPcuy(wallet, samiPoints, _idFromFront, wiracochaUuid);
     return await tx.wait();
 }
