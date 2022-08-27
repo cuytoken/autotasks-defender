@@ -64,8 +64,8 @@ export async function handler(data: any) {
      *  - bool
      *
      */
-    var ip = "http://3.80.7.117:3000";
-    // var ip = "https://alpha-bk.pachacuy.io";
+    // var ip = "http://3.80.7.117:3000";
+    var ip = "https://alpha-bk.pachacuy.io";
     var url = `${ip}/tatacuy/gift-participations/${recoveredAddress.toLowerCase()}/wallet/${timeStampFront}/timestamp/${guineaPig}/cuyTokenId`;
 
     var res = await axios(url);

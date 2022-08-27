@@ -2,11 +2,22 @@ require("dotenv").config();
 require("./warning");
 var { retrieveInfoFromId } = require("./mapping");
 var { getAbiIntoPathFile } = require("../utils");
-
 const { AutotaskClient } = require("defender-autotask-client");
+
+// !!!!IMPORTANT!!!! Set account 1 or 2 first before deploying this script
+var account2 = false;
+
+var key_defender, secret_defender;
+if (account2) {
+  key_defender = process.env.API_KEY_DEFENDER_2;
+  secret_defender = process.env.API_SECRET_DEFENDER_2;
+} else {
+  key_defender = process.env.API_KEY_DEFENDER;
+  secret_defender = process.env.API_SECRET_DEFENDER;
+}
 const client = new AutotaskClient({
-  apiKey: process.env.API_KEY_DEFENDER,
-  apiSecret: process.env.API_SECRET_DEFENDER,
+  apiKey: key_defender,
+  apiSecret: secret_defender,
 });
 
 // Required
